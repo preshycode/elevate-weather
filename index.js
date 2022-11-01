@@ -5,6 +5,7 @@ const condition = document.getElementById("condition");
 const conditionText = document.getElementById("condition-text");
 const humudity = document.getElementById("humudity");
 const wind = document.getElementById("wind");
+const visibility = document.getElementById("visibility");
 
 
 
@@ -16,7 +17,7 @@ function weather() {
     fetch('https://api.openweathermap.org/data/2.5/weather?q='+`${citySearch.value||loadCity}`+'&appid=dddb3289b28de713316c6f74c4f023a5')
   .then((response) => response.json())
   .then((data) => {
-    document.body.style.backgroundImage = `url('https://source.unsplash.com/random/?${citySearch.value},random')`
+    document.body.style.backgroundImage = `url('https://source.unsplash.com/featured/?${citySearch.value},random')`
       console.log(data);
       city.innerHTML = `Weather in ${data.name}`;
       temp.innerHTML = Math.ceil((`${data.main.temp}`-273)) +"°C";
@@ -24,8 +25,16 @@ function weather() {
       wind.innerHTML = `Wind Speed: ${data.wind.speed} Km/h`;
       condition.src = "http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png";
       conditionText.innerHTML = data.weather[0].description;
-     
+      visibility.style.display ="block";
+  })
+  .catch((err) => {
+    visibility.style.display ="none";
+      alert('City Not Found');
+      
+      
+      
   });
+  
 
 }
 submit.addEventListener("click", (e) => {
