@@ -30,7 +30,7 @@ function weather() {
   .catch((err) => {
     visibility.style.display ="none";
       alert('City Not Found');
-      
+      citySearch.value = "";
       
       
   });
